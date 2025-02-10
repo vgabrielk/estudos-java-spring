@@ -3,6 +3,7 @@ package com.example.springboot.models;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,6 +16,9 @@ public class CompanyModel {
     private UUID id;
     private String name;
     private String cnpj;
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductModel> products;
 
     public UUID getId() {
         return id;
