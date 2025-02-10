@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+
 @Entity
 @Table(name = "products")
 public class ProductModel implements Serializable {
@@ -13,17 +14,25 @@ public class ProductModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idProduct;
+    private UUID id;
     private String name;
     private String description;
     private BigDecimal value;
 
-    public UUID getIdProduct() {
-        return idProduct;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private CompanyModel company;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryModel category;
+
+    public UUID getId() {
+        return id;
     }
 
-    public void setIdProduct(UUID idProduct) {
-        this.idProduct = idProduct;
+    public void getId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -48,5 +57,20 @@ public class ProductModel implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    public CompanyModel getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyModel company) {
+        this.company = company;
+    }
+
+    public CategoryModel getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryModel category) {
+        this.category = category;
     }
 }
